@@ -41,16 +41,41 @@ function balancedLeaves(...values) {
   return { tree, leaves }
 }
 
-export function parenthesize(n) {
+function setup(n) {
   const values = []
   for (var i = 0; i < n; i++) {
     values.push(true)
     values.push(false)
   }
 
-  const { leaves } = balancedLeaves(...values)
+  return balancedLeaves(...values)
+}
+
+export function parenthesize(n) {
+  const { leaves } = setup(n)
   const paths = leaves.map(leaf =>
     leaf.pathFromRoot().map(node => node.value ? '(' : ')').join('')
   )
   console.log(paths)
+}
+
+export function latticePaths(n) {
+  const { leaves } = setup(n)
+  const paths = leaves.map(leaf => leaf.pathFromRoot())
+  const groups = paths.map(p => {
+    let height = 0
+    const numbers = []
+
+    p.forEach(node => {
+      if (node.value) {
+        numbers.push(height)
+      } else {
+        height++
+      }
+    })
+
+    return numbers
+  })
+
+  console.log(groups)
 }
