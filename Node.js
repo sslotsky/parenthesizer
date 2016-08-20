@@ -13,8 +13,7 @@ export default class Node {
   }
 
   pathFromRoot() {
-    const char = this.value ? '(' : ')'
     const parentPath = this.parent && this.parent.pathFromRoot() || []
-    return parentPath.concat([char])
+    return parentPath.concat([this])
   }
 }
