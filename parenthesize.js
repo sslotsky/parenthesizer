@@ -1,7 +1,7 @@
 import { Set, List } from 'immutable'
 import Node from './Node'
 
-export function balancedLeaves(...values) {
+export function balancedLeaves(...values) { // TODO: add optional condition
   const leaves = []
 
   function* balancedPermutations(balance, ...values) {
@@ -13,11 +13,18 @@ export function balancedLeaves(...values) {
       return
     }
 
+    const visited = {}
     for (var i = 0; i < values.length; i++) {
       const v = values[i]
+      if (visited[v]) {
+        continue
+      }
+      visited[v] = true
+
+      const nextBalance = v ? balance + 1 : balance - 1
       const headValues = List(values).take(i)
       const tailValues = List(values).skip(i + 1)
-      const nextBalance = v ? balance + 1 : balance - 1;
+
       const nextList = headValues.concat(tailValues)
       const node = new Node(v, ...balancedPermutations(nextBalance, ...nextList))
 
@@ -42,6 +49,6 @@ export function parenthesize(n) {
   }
 
   const { leaves } = balancedLeaves(...values)
-  const paths = Set(leaves.map(leaf => leaf.pathFromRoot().join('')))
+  const paths = List(leaves.map(leaf => leaf.pathFromRoot().join('')))
   console.log(paths.toJS())
 }

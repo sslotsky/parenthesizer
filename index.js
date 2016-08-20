@@ -1,5 +1,4 @@
-import permutate from './permutate'
-import { parenthesize } from './permutate'
+import { parenthesize } from './parenthesize'
 
 parenthesize(2)
 parenthesize(3)
