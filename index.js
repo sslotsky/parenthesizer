@@ -1,10 +1,11 @@
-import { parenthesize, latticePaths } from './parenthesize'
+import { parenthesize, latticePaths, mountainRanges } from './parenthesize'
 
 parenthesize(2)
 parenthesize(3)
 parenthesize(4)
 
 latticePaths(4)
+mountainRanges(3)
 
 /* Output:
  
@@ -38,4 +39,8 @@ latticePaths(4)
   [ 0, 0, 0, 2 ],
   [ 0, 0, 0, 1 ],
   [ 0, 0, 0, 0 ] ]
+                               /\
+           /\   /\     /\/\   /  \
+ /\/\/\ /\/  \ /  \/\ /    \ /    \
+
  */

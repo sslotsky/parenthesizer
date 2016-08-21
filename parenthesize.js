@@ -1,5 +1,6 @@
 import { Set, List } from 'immutable'
 import Node from './Node'
+import Printer from './Printer'
 
 function balancedLeaves(...values) {
   const leaves = []
@@ -78,4 +79,37 @@ export function latticePaths(n) {
   })
 
   console.log(groups)
+}
+
+export function mountainRanges(n) {
+  const { leaves } = setup(n)
+  const paths = leaves.map(leaf => leaf.pathFromRoot())
+  const printer = new Printer(n, 2 * n * paths.length + n + 1)
+  let column = 0
+
+  paths.forEach(p => {
+    let row = 0
+    let lastVisited = false
+
+    p.forEach(node => {
+      if (node.value === lastVisited) {
+        if (node.value) {
+          row++
+        } else {
+          row--
+        }
+      }
+
+      lastVisited = node.value
+      const char = node.value ? '/' : '\\'
+      if (column >= 28) {
+        debugger
+      }
+      printer.insert(++column, row, char)
+    })
+
+    column++
+  })
+
+  printer.print()
 }
