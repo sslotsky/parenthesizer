@@ -102,9 +102,6 @@ export function mountainRanges(n) {
 
       lastVisited = node.value
       const char = node.value ? '/' : '\\'
-      if (column >= 28) {
-        debugger
-      }
       printer.insert(++column, row, char)
     })
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js --presets es2015,stage-0",
-    "debug": "babel-node debug index.js --presets es2015,stage-0 --source-maps eval"
+    "debug": "babel-node debug index.js --presets es2015,stage-0 --source-maps inline"
   },
   "author": "",
   "license": "MIT",
